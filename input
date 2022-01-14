@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo "Your city is?:"
-read mycity
-echo "Your city is: $mycity"
