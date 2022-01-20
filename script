@@ -1,0 +1,20 @@
+import subprocess
+
+
+a=ERR4627396.sra_1.fastq
+b=ERR4627396.sra_2.fastq
+d=ERR4627396.skesa.fa
+
+# f=fastp -i $a -I $b -o ERR4627396.sra_1.fq -O ERR4627396.sra_2.fq 
+# subprocess.run("ls")
+
+fastp_cmd = ["fastp",
+                       "-i", $a,
+                       "-I", $b,
+                       "-o", "ERR4627396.sra_1.fq"
+                       "-O", "ERR4627396.sra_2.fq"] 
+
+fastp = subprocess.Popen(fastp_cmd,
+                                   stdout=subprocess.PIPE) 
+
+ fastp.stdout.close()
