@@ -53,23 +53,20 @@ class Methods_Calling:
         threads = str(cpu)
         # Pull docker
         Pull_cmd = ['docker', 'pull', 'kishwars/pepper_deepvariant:r0.7']
-
         # Generate the gvcf and vcf files
         gvcf_cmd = ['docker', 'run',
-                    '-v', '{}:{}'.format(ref_fold, ref_fold),
-                    '-v', '{}:{}'.format(output_folder, output_folder),
                     '-v', '{}:/ref'.format(ref_fold),
                     '-v', '{}:/output'.format(output_folder),
                     'kishwars/pepper_deepvariant:r0.7',
                     'run_pepper_margin_deepvariant', 'call_variant',
-                    '-b', "{}/{}".format(ref_fold, bam),
-                    '-f', "{}/{}".format(ref_fold, ref_name),
-                    '-o', output_folder,
+                    '-b', "ref/{}".format(os.path.basename(bam)),
+                    '-f', "ref/{}".format(os.path.basename(ref_name)),
+                    '-o', "/output",
                     '-p', output_prefix, '-t', threads,
                     '--ont_r9_guppy5_sup', '--gvcf']
-        subprocess.run(Pull_cmd)
-        return subprocess.run(gvcf_cmd)
-
+        # subprocess.run(Pull_cmd)
+        subprocess.run(gvcf_cmd)
+        # print(gvcf_cmd)
     # Report and File generator
     @staticmethod
     def Generate(q_list, ref_fold, q_fold):
@@ -87,13 +84,13 @@ class Methods_Calling:
         query_file = base_name + ".fastq"
 
         # Name of the reference file in the reference folder, modify this to you liking
-        ref_name = 'ref.fasta'
+        ref_name = directory + "/ref/" + base_name + 'ref.fasta'
 
         # Name of the bam file
-        bam = base_name + "_pepper.bam"
-        
+        bam = directory + "/ref/" + base_name + "_pepper.bam"
+
         # Name of bam.bai file
-        bai = base_name + "_pepper.bam.bai"
+        bai = directory + "/ref/" + base_name + "_pepper.bam.bai"
 
         # Set the number of CPU's
         p = 1
@@ -105,13 +102,13 @@ class Methods_Calling:
         output_folder = directory + "/" + "output"
 
         # Creates the output folder
-        Methods_Calling.folder_create(output_folder)
-
-        # Creates the bam file for each query file in the list
-        Methods_Calling.bam_file(ref_fold, query_file, bam, q_fold)
-
-        # Indexes each bam file that was created in the previous step
-        Methods_Calling.bai_file(bam, bai, ref_fold)
+        # Methods_Calling.folder_create(output_folder)
+        #
+        # # Creates the bam file for each query file in the list
+        # Methods_Calling.bam_file(ref_fold, query_file, bam, q_fold)
+        #
+        # # Indexes each bam file that was created in the previous step
+        # Methods_Calling.bai_file(bam, bai, ref_fold)
 
         # Produces the GVCF and VCF files using variant calling
         Methods_Calling.gvcf(output_folder, output_prefix, cpu, bam, ref_fold, ref_name)
