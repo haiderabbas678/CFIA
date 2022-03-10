@@ -46,7 +46,6 @@ class Methods_Calling:
         bai_cmd = ['samtools', 'index', bam, bai]
         mv_file = ['mv', bam, bai, ref_fold]
         subprocess.run(bai_cmd)
-        subprocess.run(mv_file)
 
     @staticmethod
     def gvcf(output_folder, output_prefix, cpu, bam, ref_fold, ref_name):
@@ -66,7 +65,7 @@ class Methods_Calling:
                     '--ont_r9_guppy5_sup', '--gvcf']
         # subprocess.run(Pull_cmd)
         subprocess.run(gvcf_cmd)
-        # print(gvcf_cmd)
+
     # Report and File generator
     @staticmethod
     def Generate(q_list, ref_fold, q_fold):
@@ -84,7 +83,7 @@ class Methods_Calling:
         query_file = base_name + ".fastq"
 
         # Name of the reference file in the reference folder, modify this to you liking
-        ref_name = directory + "/ref/" + base_name + 'ref.fasta'
+        ref_name = directory + "/ref/ref.fasta"
 
         # Name of the bam file
         bam = directory + "/ref/" + base_name + "_pepper.bam"
@@ -103,11 +102,11 @@ class Methods_Calling:
 
         # Creates the output folder
         # Methods_Calling.folder_create(output_folder)
-        #
+        # #
         # # Creates the bam file for each query file in the list
         # Methods_Calling.bam_file(ref_fold, query_file, bam, q_fold)
         #
-        # # Indexes each bam file that was created in the previous step
+        # Indexes each bam file that was created in the previous step
         # Methods_Calling.bai_file(bam, bai, ref_fold)
 
         # Produces the GVCF and VCF files using variant calling
