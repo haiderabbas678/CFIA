@@ -101,13 +101,13 @@ class Methods_Calling:
         output_folder = directory + "/" + "output"
 
         # Creates the output folder
-        # Methods_Calling.folder_create(output_folder)
-        # #
-        # # Creates the bam file for each query file in the list
-        # Methods_Calling.bam_file(ref_fold, query_file, bam, q_fold)
-        #
+        Methods_Calling.folder_create(output_folder)
+        
+        # Creates the bam file for each query file in the list
+        Methods_Calling.bam_file(ref_fold, query_file, bam, q_fold)
+       
         # Indexes each bam file that was created in the previous step
-        # Methods_Calling.bai_file(bam, bai, ref_fold)
+        Methods_Calling.bai_file(bam, bai, ref_fold)
 
         # Produces the GVCF and VCF files using variant calling
         Methods_Calling.gvcf(output_folder, output_prefix, cpu, bam, ref_fold, ref_name)
