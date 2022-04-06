@@ -12,6 +12,6 @@ conda install -c bioconda qualimap=2.2.2d
 
 # How to execuet the script in terminal
 Go into your desired directory and execute the below command\
-> python genome_assembly.py [fold]\
+python genome_assembly.py [fold]\
 [fold] The folder that conatins the query files of interest
 
