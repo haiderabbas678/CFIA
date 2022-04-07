@@ -1,7 +1,6 @@
 # Genome_Assembly
 # Introduction
-This script is able to assemble genomes(de novo) using illumina paired end reads as well as produce a QC report to assess the quality of the assembled \
-genome
+This script is able to assemble genomes(de novo) using illumina paired end reads as well as produce a QC report to assess the quality of the assembled genome
 
 # Dependencies
 conda install -c bioconda fastp=0.23.2 \
